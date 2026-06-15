@@ -1,0 +1,23 @@
+# Secrets — never publish
+.env
+
+# Logs — local only
+logs/*.log
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.Python
+venv/
+.venv/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Claude Code local settings
+.claude/
