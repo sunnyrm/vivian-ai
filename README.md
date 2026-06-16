@@ -1,32 +1,58 @@
 # Vivian AI
 
-A personal AI chief of staff. Lives in Telegram.
-Runs 24/7 on Hetzner. Built incrementally.
+A personal AI chief of staff that runs 24/7 and starts your day with what matters.
 
-## What Vivian does (MVP)
-- Sends a daily news digest at 6am CEST via Telegram
-- Source: Google News (India locale) — top stories ranked by prominence
-- Top 10 stories with headlines and links
+## Why I built this
+
+Product guy tinkering with AI to make daily life easier, and learning in the process.
+
+## What it does
+
+Vivian sends a daily morning news digest to Telegram at 6am. It pulls the top 10 stories from Google News (India locale), ranked by editorial prominence — a mix of India and world news relevant to an Indian reader.
 
 ## Stack
-- Interface: Telegram Bot
-- Hosting: Hetzner VPS (Ubuntu 26.04)
-- News: Google News RSS (no AI for MVP)
-- Language: Python 3
 
-## Cost
-- Hetzner VPS: ~€7/month
-- API costs: €0 (MVP uses no AI)
+- **Interface:** Telegram Bot
+- **Hosting:** Hetzner VPS (Ubuntu 26.04)
+- **News:** Google News RSS — editorially ranked, no AI for MVP
+- **Language:** Python 3
+- **Scheduler:** cron
 
-## Setup
-See DECISIONS.md for all architecture decisions.
-Add your secrets to .env (never commit this file).
+## How to run
 
-## How We Work
-- Strategy & decisions: Claude.ai project chat
-- Building & shipping: Claude Code
-- Context files: CLAUDE.md, SOUL.md, DECISIONS.md
-- CLAUDE.md is auto-read by Claude Code every session
+**Prerequisites:** Python 3, a Telegram bot token, a Hetzner (or any) VPS
+
+```bash
+git clone https://github.com/sunnyrm/vivian-ai.git
+cd vivian-ai
+pip3 install -r requirements.txt
+cp .env.example .env  # fill in your credentials
+python3 src/news_digest.py
+```
+
+For scheduled delivery, add to crontab:
+```
+0 4 * * * cd /path/to/vivian-ai && python3 src/news_digest.py >> logs/vivian.log 2>&1
+```
 
 ## Roadmap
-See DECISIONS.md for full use case roadmap.
+
+| Status | Use Case |
+|---|---|
+| ✅ | Daily news digest |
+| ⏳ | Email scanning + reply drafting |
+| ⏳ | Household coordination |
+| ⏳ | Diet organiser |
+| ⏳ | Financial organiser |
+| ⏳ | Idea capture |
+| ⏳ | Content generation |
+| ⏳ | Calendar management |
+
+## Cost
+
+- Hetzner VPS: ~€7/month
+- API costs: €0 (no AI used in MVP)
+
+## License
+
+MIT
